@@ -48,7 +48,8 @@ public class DepositUserServiceTest {
         DepositUser depositUser = new DepositUser();
         depositUser.setAccountId(accountId);
         depositUser.setTenor(20);
-        Mockito.when(depositUserRepository.getAllDepositUserByUserId(accountId)).thenReturn(depositUser);
+        List<DepositUser> depositUserList = Collections.singletonList(depositUser);
+        Mockito.when(depositUserRepository.getAllDepositUserByUserId(accountId)).thenReturn(depositUserList);
 
         String actual = depositUserService.getDepositByAccountId(accountId);
 
@@ -70,7 +71,7 @@ public class DepositUserServiceTest {
     @Test
     public void getDepositAll_returnData_whenAccountIdNotExist() {
         String accountId = "account1";
-        Mockito.when(depositUserRepository.getAllDepositUserByUserId(accountId)).thenReturn(new DepositUser());
+        Mockito.when(depositUserRepository.getAllDepositUserByUserId(accountId)).thenReturn(new ArrayList<>());
 
         String actual = depositUserService.getDepositByAccountId(accountId);
 

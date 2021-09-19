@@ -39,16 +39,16 @@ public class DepositUserService {
 
     public String getDepositByAccountId (String accountId) {
 
-        DepositUser depositUser = depositUserRepository.getAllDepositUserByUserId(accountId);
+        List<DepositUser> depositUsers = depositUserRepository.getAllDepositUserByUserId(accountId);
         String message = RisConstants.Status.SUCCESS_MESSAGE;
         String status =  RisConstants.Status.SUCCESS_CODE;
         String data = Strings.EMPTY;
 
-        if(Objects.isNull(depositUser) || Strings.isEmpty(depositUser.toString())){
+        if(CollectionUtils.isEmpty(depositUsers)){
             message = String.format(RisConstants.Error.ERROR_DATA_DEPOSIT_NOT_FOUND_BY_ID, accountId);
         }
 
-        data = depositUser.toString();
+        data = depositUsers.toString();
         Response response = new Response(status, data, message);
 
         return response.toString();

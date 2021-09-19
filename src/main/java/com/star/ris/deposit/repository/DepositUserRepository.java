@@ -30,6 +30,6 @@ public interface DepositUserRepository extends JpaRepository<DepositUser, String
             " left join account a " +
             " on a.account_id = d.account_id" +
             " where d.account_id = :accountId " )
-    DepositUser getAllDepositUserByUserId(@RequestParam(name = "accountId") String accountId);
+    List<DepositUser> getAllDepositUserByUserId(@RequestParam(name = "accountId") String accountId);
 
 }
